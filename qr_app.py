@@ -16,7 +16,7 @@ class QRApp:
         self.update_qr()
 
     def update_qr(self):
-        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = time.strftime("%m/%d/%Y %H:%M")
         self.ts_label.config(text=timestamp)
         qr_img = pyqrcode.create(timestamp, error='H')
         buffer = io.BytesIO()
