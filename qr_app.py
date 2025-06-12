@@ -16,17 +16,22 @@ class QRApp:
         self.update_qr()
 
     def update_qr(self):
+        # format without seconds
         timestamp = time.strftime("%m/%d/%Y %H:%M")
         self.ts_label.config(text=timestamp)
+
         qr_img = pyqrcode.create(timestamp, error='H')
         buffer = io.BytesIO()
         qr_img.png(buffer, scale=6)
         buffer.seek(0)
         img = Image.open(buffer)
         tk_img = ImageTk.PhotoImage(img)
+
         self.label.config(image=tk_img)
         self.label.image = tk_img
-        self.root.after(1000, self.update_qr)
+
+        # refresh once every minute
+        self.root.after(60000, self.update_qr)
 
 if __name__ == "__main__":
     root = tk.Tk()
